@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 
 export default function Mysevices() {
     const { setUser, user } = useContext(UserContext);
-const [refresh, setRefresh] = useState(true)
+    const [refresh, setRefresh] = useState(true)
     const [myListServices, setMyListServices] = useState()
+    const navigate = useNavigate()
+
+   
 
     const config = {
         headers: {
-            "Authorization": `Bearer ${user.token}`
+            "Authorization": `Bearer ${user?.token}`
         }
     }
 
@@ -24,28 +27,30 @@ const [refresh, setRefresh] = useState(true)
             setMyListServices(x.data)
             console.log(x.data)
 
-        }).catch(x => console.log(x));
+        }).catch(x => {console.log(x)
+            setUser("Nav")
+            navigate("/sign-in")});
     }, [refresh]);
 
 
-   function availableService (e){
-    const {id} = (e.target)  
-    console.log(id) 
+    function availableService(e) {
+        const { id } = (e.target)
+        console.log(id)
 
-        const availableserv = axios.patch(`${import.meta.env.VITE_API_URL}/my-service/${id}`,id,config)
+        const availableserv = axios.patch(`${import.meta.env.VITE_API_URL}/my-service/${id}`, id, config)
         availableserv.then(() => {
-            setRefresh(!refresh) 
-            console.log(refresh)         
+            setRefresh(!refresh)
+            console.log(refresh)
         })
 
         availableserv.catch(erro => {
             alert(erro);
-            console.log("nok")  
-           
-        });
-    
+            console.log("nok")
 
-   }
+        });
+
+
+    }
 
 
     return (

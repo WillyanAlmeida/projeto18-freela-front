@@ -39,6 +39,9 @@ font-family: 'Playball', cursive;
     position: fixed;
     top: 0;
     left: 0;
+    div{
+        color: #fff;
+    }
     p {
         font-family: 'Playball', cursive;
         font-size: 39px;

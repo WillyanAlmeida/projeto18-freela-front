@@ -21,9 +21,9 @@ export default function HomePage() {
 
 
     return (
-        <ServicesContainer>
+        <ServicesContainer >
             {ListServices?.map((service)=>
-            <Link to={`/Service/${service.servid}`} key={service.servid}>
+            <Link  to={`/Service/${service.servid}`} key={service.servid}>
             <MyServicesContainer>
                 <MainPicture>
                     <img src={service.url}></img>
@@ -31,8 +31,9 @@ export default function HomePage() {
                 <AllInformationService>
                     <h2>{service.servicename}</h2>
                     <h3>{service.description}</h3>
-                    <h4>R$ {service.price}</h4>
-                    <p>{service.username}</p>
+                    <h3>Categoria: {service.name}</h3>
+                    <h4>R$ {service.price}/hora</h4>
+                    <p>by {service.username}</p>
                 </AllInformationService>
             </MyServicesContainer>
             </Link>)}
@@ -46,6 +47,9 @@ const ServicesContainer = styled.div`
      background-color: #E5E5E5;
      padding-top: 50px;
      overflow:scroll;
+    color: #000;
+     
+    
 `
 
 const MyServicesContainer = styled.div`
@@ -84,9 +88,11 @@ const AllInformationService = styled.div`
     margin-left: 3px;
     margin-right: 3px;
     gap: 2px;
+   
 
     h2{
         font-size: 24px;
+        text-decoration: none;
     }
     h3{
         font-size: 20px;
@@ -102,3 +108,4 @@ const CheckboxAvailable = styled.div`
     flex-direction: column;
     align-items: center;
 `
+

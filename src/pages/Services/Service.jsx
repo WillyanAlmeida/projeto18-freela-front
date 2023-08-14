@@ -40,10 +40,12 @@ function Sendmsg(){
                 <AllInformationService>
                     <h2>{allinfo?.servicename}</h2>
                     <h3>{allinfo?.description}</h3>
+                    <h3>Categoria: {allinfo?.name}</h3>
                     <h4>R$ {allinfo?.price}/hora</h4>
                     <p>{allinfo?.username}</p>
                     <p>{allinfo?.city}</p>
                     <Phone onClick={Sendmsg}><img src={wpp}></img> {allinfo?.phone}</Phone>
+                    <p>- Clique no número para enviar mensagem</p>
                 </AllInformationService>
             </MyServicesContainer>
 

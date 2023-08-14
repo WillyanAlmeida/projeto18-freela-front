@@ -8,15 +8,18 @@ import { ThreeDots } from "react-loader-spinner";
 
 
 export default function NewService() {
-    const [formNewService, setFormNewService] = useState({ name: '', description: '', price: '', categoryId: '', url:'' })
+    const [formNewService, setFormNewService] = useState({ name: '', description: '', price: '', categoryId: '', url: '' })
     const [btstats, setBtstats] = useState(false)
     const [categoryList, setCategoryList] = useState();
     const { setUser, user } = useContext(UserContext);
     const navigate = useNavigate()
 
+   
+
+
     const config = {
         headers: {
-            "Authorization": `Bearer ${user.token}`
+            "Authorization": `Bearer ${user?.token}`
         }
     }
 
@@ -26,7 +29,12 @@ export default function NewService() {
         ).then(x => {
             setCategoryList(x.data)
             console.log(x.data)
-            
+            if (!user) {
+                setUser("Nav")
+                navigate("/sign-in")
+            }
+        
+
         }).catch(x => console.log(x));
     }, []);
 
@@ -43,9 +51,9 @@ export default function NewService() {
         e.preventDefault();
         setBtstats(true);
 
-        const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/new-service`, formNewService,config)
+        const cadastro = axios.post(`${import.meta.env.VITE_API_URL}/new-service`, formNewService, config)
         cadastro.then((x) => {
-          
+
             setBtstats(false)
             console.log(x.data.user)
             navigate("/")
@@ -57,6 +65,9 @@ export default function NewService() {
         });
     }
 
+ 
+
+
     return (
         <SingInContainer>
             <form onSubmit={createService}>
@@ -65,17 +76,17 @@ export default function NewService() {
                 <input disabled={btstats} type="url" name="picture" id="url" onChange={updateFormNewService} value={formNewService['url']} placeholder="Foto do Serviço" />
                 <input disabled={btstats} placeholder="Preço" type="number" id="price" value={formNewService['price']} onChange={updateFormNewService} />
                 <select id="categoryId" value={formNewService['categoryId']} onChange={updateFormNewService} >
-                    {categoryList?.map((category)=>{
-                           return <option key={category.id} value={category.id}>{category.name}</option>
-                        })}
-                
+                    {categoryList?.map((category) => {
+                        return <option key={category.id} value={category.id}>{category.name}</option>
+                    })}
+
                 </select>
 
 
                 {btstats ? <button disabled={btstats} type="submit"><ThreeDots color="rgba(255, 255, 255, 1)" height={13} width={51} /></button> : <button disabled={btstats} type="submit">Criar Serviço</button>}
             </form>
 
-           
+
         </SingInContainer>
     )
 }
