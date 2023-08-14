@@ -15,7 +15,7 @@ export default function SignInPage() {
   const {user, setUser} = useContext(UserContext);
   const navigate = useNavigate()
 
-  if(user === "Nav") {window.location.reload()}
+ // if(user === "Nav") {window.location.reload()}
 
   const updateFormSignin = (e) => {
     const { id, value } = e.target;
