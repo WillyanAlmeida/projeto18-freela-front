@@ -18,7 +18,7 @@ function App() {
 
   const usePathname = () => {
     const location = useLocation();
-    return location.pathname;
+    return location.pathname; 
   }
 
 

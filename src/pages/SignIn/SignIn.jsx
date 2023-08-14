@@ -22,7 +22,6 @@ export default function SignInPage() {
     const newForm = { ...formSignin, [id]: value };
     setFormSignin(newForm);
   }
- 
   
 
   function login(e) {
